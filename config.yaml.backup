@@ -1,0 +1,11 @@
+# config.yaml
+base: https://www.qu-la.com
+purl: /booktxt/15394938116/61371543116.html
+append_mode: false # 写文件为追加模式
+
+query:
+  title: ["h1.chaptername"] # 标题选择器
+  content: ["div#txt"] #内容选择器
+  next: ["a#pb_next"] #下一章选择器
+  next_with_index: false #是否使用索引
+  next_index: 0 #索引
