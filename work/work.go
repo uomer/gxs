@@ -11,6 +11,12 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+var conf *config.Conf
+
+func SetConfig(config *config.Conf) {
+	conf = config
+}
+
 // 爬小说并写入文件
 // 参数:
 // base : 基本purl
@@ -21,7 +27,6 @@ func Work(base, purl string, file *os.File) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	conf := config.Config
 	titleFindArr := conf.Query.Title
 	// 章节标题
 	titleSel := gSel(doc, titleFindArr)
@@ -35,11 +40,15 @@ func Work(base, purl string, file *os.File) {
 	//
 	content = strings.Split(content, "()\n")[0]
 	// 写入
-	file.WriteString(title)
-	file.WriteString("\n\n")
-	file.WriteString(content)
-	file.WriteString("\n\n")
-	fmt.Println(title)
+	if title != "" {
+		file.WriteString(title)
+		file.WriteString("\n\n")
+		fmt.Println(title)
+	}
+	if content != "" {
+		file.WriteString(content)
+		file.WriteString("\n\n")
+	}
 
 	// 下一章
 	nextFindArr := conf.Query.Next

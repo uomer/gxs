@@ -10,7 +10,7 @@ func gSel(doc *goquery.Document, findArr []string) *goquery.Selection {
 	if len(findArr) > 1 {
 		for i, v := range findArr {
 			if i > 0 {
-				sel.Find(v)
+				sel = sel.Find(v)
 			}
 		}
 	}

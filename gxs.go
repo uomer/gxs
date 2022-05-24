@@ -12,8 +12,15 @@ import (
 // : -f 写入的文件名
 // : -u 页面的url在基本url后面的部分
 func main() {
-	conf := config.Config
 	param := gparam.GetParam()
+	cf := param["-c"]
+	var conf *config.Conf
+	if cf != "" {
+		conf = config.UseFile(cf)
+	} else {
+		conf = config.GetConf()
+	}
+	work.SetConfig(conf)
 	base := param["-b"]
 	if base == "" {
 		base = conf.Base
@@ -32,7 +39,7 @@ func main() {
 	}
 	file, err := os.OpenFile(filename, fileMode, 0644)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Printf("打开要写入的文件失败，%s\n", err)
 		return
 	}
 	defer file.Close()
