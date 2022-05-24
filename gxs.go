@@ -20,7 +20,8 @@ func main() {
 	} else {
 		conf = config.GetConf()
 	}
-	work.SetConfig(conf)
+	work.SetQuery(&conf.Query)
+	work.SetEncode(conf.Encode)
 	base := param["-b"]
 	if base == "" {
 		base = conf.Base

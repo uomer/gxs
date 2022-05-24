@@ -11,10 +11,14 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-var conf *config.Conf
+var query *config.Query
+var encode string
 
-func SetConfig(config *config.Conf) {
-	conf = config
+func SetQuery(q *config.Query) {
+	query = q
+}
+func SetEncode(code string) {
+	encode = code
 }
 
 // 爬小说并写入文件
@@ -27,16 +31,16 @@ func Work(base, purl string, file *os.File) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	titleFindArr := conf.Query.Title
+	titleFindArr := query.Title
 	// 章节标题
 	titleSel := gSel(doc, titleFindArr)
 	title := titleSel.Text()
 	// 内容
-	contentFindArr := conf.Query.Content
+	contentFindArr := query.Content
 	contentSel := gSel(doc, contentFindArr)
 	content := contentSel.Text()
-	title = convert.ConvertString(title)
-	content = convert.ConvertString(content)
+	title = convert.ConvertString(title, encode)
+	content = convert.ConvertString(content, encode)
 	//
 	content = strings.Split(content, "()\n")[0]
 	// 写入
@@ -51,9 +55,9 @@ func Work(base, purl string, file *os.File) {
 	}
 
 	// 下一章
-	nextFindArr := conf.Query.Next
-	nextWithIndex := conf.Query.NextWithIndex
-	nextIndex := conf.Query.NextIndex
+	nextFindArr := query.Next
+	nextWithIndex := query.NextWithIndex
+	nextIndex := query.NextIndex
 	nextSel := gSelWithIndex(doc, nextFindArr, nextWithIndex, nextIndex)
 	url, ok := nextSel.Attr("href")
 	if !ok {

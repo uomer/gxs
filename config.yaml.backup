@@ -1,7 +1,8 @@
 # config.yaml
-base: https://www.qu-la.com
-purl: /booktxt/15394938116/61371543116.html
+base: https://www.qu-la.com # 小说网站的域名
+purl: /booktxt/15394938116/61371543116.html # 开始页的链接去掉域名的部分
 append_mode: false # 写文件为追加模式
+encode: gbk # 网站的字符编码
 
 query:
   title: ["h1.chaptername"] # 标题选择器

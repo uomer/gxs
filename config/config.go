@@ -9,17 +9,20 @@ import (
 	"github.com/go-yaml/yaml"
 )
 
+type Query struct {
+	Title         []string `yaml:"title"`
+	Content       []string `yaml:"content"`
+	Next          []string `yaml:"next"`
+	NextWithIndex bool     `yaml:"next_with_index"`
+	NextIndex     uint     `yaml:"next_index"`
+}
+
 type Conf struct {
 	Base       string `yaml:"base"`
 	Purl       string `yaml:"purl"`
 	AppendMode bool   `yaml:"append_mode"`
-	Query      struct {
-		Title         []string `yaml:"title"`
-		Content       []string `yaml:"content"`
-		Next          []string `yaml:"next"`
-		NextWithIndex bool     `yaml:"next_with_index"`
-		NextIndex     uint     `yaml:"next_index"`
-	} `yaml:"query"`
+	Encode     string `yaml:"encode"`
+	Query      `yaml:"query"`
 }
 
 var Config = new(Conf)
