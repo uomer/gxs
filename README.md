@@ -34,7 +34,7 @@ Go语言实验小说爬虫
 
 #### 配置文件
 
-config.yaml
+1. config.yaml 内容
 
 ```yaml
 # config.yaml
@@ -50,3 +50,8 @@ query:
   next_with_index: false #是否使用索引
   next_index: 0 #索引
 ```
+
+2. 默认路径
+    1. `./config.yaml`
+    2. `~/.gxs.yaml`
+    3. `/etc/gxs/config.yaml`
