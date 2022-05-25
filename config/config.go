@@ -9,6 +9,7 @@ import (
 	"github.com/go-yaml/yaml"
 )
 
+// html DOM 查询配置
 type Query struct {
 	Title         []string `yaml:"title"`
 	Content       []string `yaml:"content"`
@@ -17,6 +18,7 @@ type Query struct {
 	NextIndex     uint     `yaml:"next_index"`
 }
 
+// 配置文件结构
 type Conf struct {
 	Base       string `yaml:"base"`
 	Purl       string `yaml:"purl"`
@@ -25,10 +27,10 @@ type Conf struct {
 	Query      `yaml:"query"`
 }
 
-var Config = new(Conf)
 var configFile string
 var useConf bool = false
 
+// 判断文件是否存在
 func IsFileExist(path string) bool {
 	fileInfo, err := os.Stat(path)
 	if err != nil {
@@ -40,23 +42,28 @@ func IsFileExist(path string) bool {
 	return true
 }
 
-func UseFile(cf string) *Conf {
+// 使用指定配置文件
+func (conf *Conf) UseFile(cf string) {
 	if IsFileExist(cf) {
 		configFile = cf
 	} else {
-		configFile = defaultConfigFile()
+		fmt.Println("配置文件不存在")
+		return
 	}
-	parse(configFile)
-	return Config
-
+	conf.parse(configFile)
 }
 
-func GetConf() *Conf {
+// 使用默认配置文件
+func (conf *Conf) GetConf() {
 	configFile = defaultConfigFile()
-	parse(configFile)
-	return Config
+	if !IsFileExist(configFile) {
+		fmt.Println("配置文件不存在")
+		return
+	}
+	conf.parse(configFile)
 }
 
+// 查找默认的配置文件
 func defaultConfigFile() string {
 	currentUser, err := user.Current()
 	if err != nil {
@@ -78,12 +85,13 @@ func defaultConfigFile() string {
 	return configFile
 }
 
-func parse(configFile string) {
+// 解析配置文件
+func (conf *Conf) parse(configFile string) {
 	file, err := ioutil.ReadFile(configFile)
 	if err != nil {
 		fmt.Printf("ioutil.ReadFile err:%s\n", err)
 	}
-	err = yaml.Unmarshal(file, &Config)
+	err = yaml.Unmarshal(file, &conf)
 	if err != nil {
 		fmt.Printf("err:%s\n", err)
 	}
