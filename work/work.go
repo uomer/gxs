@@ -6,7 +6,6 @@ import (
 	"gxs/convert"
 	"log"
 	"os"
-	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -41,8 +40,8 @@ func Work(base, purl string, file *os.File) {
 	content := contentSel.Text()
 	title = convert.ConvertString(title, encode)
 	content = convert.ConvertString(content, encode)
-	//
-	content = strings.Split(content, "()\n")[0]
+	//content = strings.Split(content, "()\n")[0]
+
 	// 写入
 	if title != "" {
 		file.WriteString(title)

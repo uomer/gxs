@@ -8,5 +8,8 @@ import (
 
 func ConvertString(src string, code string) string {
 	srcCoder := mahonia.NewDecoder(code)
-	return strings.Replace(srcCoder.ConvertString(src), "聽", "", -1)
+	res := strings.ReplaceAll(srcCoder.ConvertString(src), "聽", "")
+	res = strings.TrimSpace(res)
+	res = strings.ReplaceAll(res, "    ", "\n")
+	return res
 }
