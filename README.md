@@ -31,3 +31,20 @@ Go语言实验小说爬虫
     export PATH=$PATH:$GOPATH/bin
     gxs [-b 网站域名] [-u 启始章节链接(不带域名)] -f 写入的文件 [-a] [-c 指定配置文件路径]
     ```
+
+#### 配置文件 config.yaml
+```yaml
+# config.yaml
+base: https://www.qu-la.com # 小说网站的域名
+purl: /booktxt/15394938116/61371543116.html # 开始页的链接去掉域名的部分
+append_mode: false # 写文件为追加模式
+encode: gbk # 网站的字符编码
+
+query:
+  title: ["h1.chaptername"] # 标题选择器
+  content: ["div#txt"] #内容选择器
+  next: ["a#pb_next"] #下一章选择器
+  next_with_index: false #是否使用索引
+  next_index: 0 #索引
+
+```
