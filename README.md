@@ -26,6 +26,7 @@ Go语言实验小说爬虫
     - 还可以用 -c 选项，指定要使用的配置文件
 3.  全局使用
     ```sh
+    cd gxs
     go install
     export GOPATH=~/go
     export PATH=$PATH:$GOPATH/bin
