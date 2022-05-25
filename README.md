@@ -9,6 +9,8 @@ Go语言实验小说爬虫
 
 #### 安装教程
 
+> 提前安装好go语言
+
 1.  `git clone https://gitee.com/uomer/gxs`
 2.  `cd gxs`
 3.  `go build`
@@ -26,3 +28,10 @@ Go语言实验小说爬虫
     - [] 内为可选项
     - -a 为追加模式写入
     - 还可以用 -c 选项，指定要使用的配置文件
+3.  全局使用
+    ```sh
+    go install
+    export GOPATH=~/go
+    export PATH=$PATH:$GOPATH/bin
+    gxs [-b 网站域名] [-u 启始章节链接(不带域名)] -f 写入的文件 [-a] [-c 指定配置文件路径]
+    ```
