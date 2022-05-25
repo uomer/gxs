@@ -20,6 +20,7 @@ func main() {
 	purl := flag.String("u", "", "启始章节链接")
 	filename := flag.String("f", "", "生成的小说文件")
 	appendMode := flag.Bool("a", false, "追加模式")
+	encode := flag.String("e", "", "网页的字符编码")
 	flag.Parse()
 
 	if *filename == "" {
@@ -49,11 +50,15 @@ func main() {
 			fmt.Println("启用重建模式")
 		}
 	}
+	if *encode == "" {
+		*encode = conf.Encode
+	}
+	fmt.Printf("网页的字符编码：%s\n\n", *encode)
 
 	// 设置爬取解析dom
 	work.SetQuery(&conf.Query)
 	// 设置页面编码
-	work.SetEncode(conf.Encode)
+	work.SetEncode(*encode)
 
 	// 设置打开文件的模式
 	fileMode := os.O_CREATE | os.O_WRONLY
