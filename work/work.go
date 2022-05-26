@@ -62,6 +62,8 @@ func Work(base, purl string, file *os.File) {
 	if !ok {
 		fmt.Println("没有下一章了")
 		return
+	} else {
+		fmt.Printf("%s\n\n", url)
 	}
 	Work(base, url, file)
 }
