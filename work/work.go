@@ -10,12 +10,18 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
+// 查询选择器类型
 var query *config.Query
+
+// 字符编码
 var encode string
 
+// 设置选择器
 func SetQuery(q *config.Query) {
 	query = q
 }
+
+// 设置编码
 func SetEncode(code string) {
 	encode = code
 }
@@ -65,5 +71,6 @@ func Work(base, purl string, file *os.File) {
 	} else {
 		fmt.Printf("%s\n\n", url)
 	}
+
 	Work(base, url, file)
 }

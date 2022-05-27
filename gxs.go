@@ -13,6 +13,8 @@ import (
 // : -f 写入的文件名
 // : -u 页面的url在基本url后面的部分
 // : -a 追加模式
+// : -c 配置文件的路径
+// : -e 字符编码
 func main() {
 	// 命令行参数处理
 	cf := flag.String("c", "", "使用指定配置文件")
@@ -28,6 +30,7 @@ func main() {
 		return
 	}
 
+	// 配置
 	var conf = new(config.Conf)
 
 	if *cf != "" {
